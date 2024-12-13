@@ -1,0 +1,24 @@
+<odoo>
+    <!-- Inherit view_company_form  -->
+    <record id="view_company_form_scs_lock_year_inherit" model="ir.ui.view">
+        <field name="name">res.company.scs_lock_year.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook[last()]" position="inside">
+                <page string="Year Closing Dates" name="year_clossing">
+                    <field name="closing_date_model_ids">
+                        <list>
+                            <field name="model_id"/>
+                            <field name="model_field_ids" widget="many2many_tags"/>
+                            <field name="lock_date"/>
+                            <field name="warning_message"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
+   

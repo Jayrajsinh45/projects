@@ -1,0 +1,17 @@
+<odoo>
+    <record id="view_res_company_closing_date_model_form" model="ir.ui.view">
+        <field name="name">lock.date.model.form</field>
+        <field name="model">lock.date.model</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="company_id" invisible="1"/>
+                    <field name="model_id" string="Model" required="1"/>
+                    <field name="model_field_ids" string = "Select Fields" widget="many2many_tags"/>
+                    <field name="lock_date" string="Lock Date"/>
+                    <field name="warning_message" string="Warning Message"/>
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>
