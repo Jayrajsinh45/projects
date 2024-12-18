@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lock Date Update</title>
+    <title>Lock Date Year</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,13 +45,13 @@
                             <div class="text-center">
                                 <h2
                                     style="letter-spacing:2px; font-weight:500; color:#fcf9f9; text-transform:uppercase;font-family: Poppins,Helvetica,sans-serif;">
-									Lock Date Update
+									Lock Date Year
                                 </h2>
                                 <span class="o_gradient"
                                     style="width:100%; max-width:1000px; height:1px; background-color:#ffffff!important; display:inline-block; border-radius:2px;"></span>
                                 <p
                                     style="font-weight:normal; color:#fcf9f9; font-size:1.1rem; margin-top:24px;font-family: Poppins,Helvetica,sans-serif;">
-                                    This module, a valuable function is introduced to your system, enabling the configuration of a closing date for vital documents like Sale Orders, Purchase Orders, and Delivery Orders. If a user attempts to designate a date beyond this set closing date, a warning prompt appears. The adaptability to tailor this closing date ensures precision, guaranteeing compliance with specified date constraints for these essential documents while reducing potential errors.
+                                    This module enforces data accuracy by restricting record creation and updates based on lock dates and editable fields configured at the company level.If a user attempts to designate a date beyond this set closing date, a warning prompt appears. The adaptability to tailor this closing date ensures precision, guaranteeing compliance with specified date constraints for these essential documents while reducing potential errors.
                                 </p>
                             </div>
                         </div>
@@ -75,10 +75,10 @@
                             <div class="text-center">
                                 <img src="configuration.png" style="width: 20%;" alt="Icon" />
                             </div>
-							<h5 class="card-title" style="font-family: Poppins; text-align: center;margin-top:10px"> Closing Date Configuration</h5>
+							<h5 class="card-title" style="font-family: Poppins; text-align: center;margin-top:10px"> Dynamic Lock Date Configuration</h5>
                             <div>
                                 <p class="card-text" style="font-size: 17px; font-family: Poppins; text-align: center;margin-top:20px">
-                                    Set a configurable lock date for vital documents like Sale Orders, Purchase Orders, and Delivery Orders to ensure compliance with specified date constraints.
+                                    Configure lock dates for specific models in the company form, with settings for compare fields, editable fields, and custom warning messages.
 								</p>
                             </div>
                         </div>
@@ -91,9 +91,9 @@
                                 <img src="restricted.png" style="width: 20%;" alt="Icon" />
                             </div>
                             <div>
-							<h5 class="card-title" style="font-family: Poppins; text-align: center;margin-top:10px"> Update Restrictions
+							<h5 class="card-title" style="font-family: Poppins; text-align: center;margin-top:10px"> Validation on Record Creation
                                 </h5>
-                                <p class="card-text" style="font-size: 17px;margin-top:20px;text-align: center;"> Prevents updates to orders if the current date exceeds the configured lock date, while allowing updates to selected fields.</p>
+                                <p class="card-text" style="font-size: 17px;margin-top:20px;text-align: center;"> Prevent the creation of records if the compare field's value is earlier than the configured lock date, displaying a warning message for invalid entries.</p>
                             </div>
                         </div>
                     </div>
@@ -101,12 +101,12 @@
                         <div class="card"
                             style="flex: 1; margin-top: 20px; border-radius: 20px;background: white;padding: 20px; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 50px -12px, rgba(0, 0, 0, 0.3) 0px 18px 26px -18px;">
                             <div class="text-center">
-                                <img src="authorization.png" style="width: 20%;" alt="Icon" />
+                                <img src="lock.png" style="width: 20%;" alt="Icon" />
                             </div>
-							<h5 class="card-title" style="font-family: Poppins; text-align: center;margin-top:10px"> Admin Access for Date Modification
+							<h5 class="card-title" style="font-family: Poppins; text-align: center;margin-top:10px"> Restricted Field Updates
                                 </h5>
                             <div>
-                                <p class="card-text" style="font-size: 17px;margin-top:20px;text-align: center;">Business administrators can update the lock date from a wizard to maintain flexibility in managing document dates.</p>
+                                <p class="card-text" style="font-size: 17px;margin-top:20px;text-align: center;">Allow updates only to specified editable fields for older records; modifications to other fields trigger a warning and are restricted.</p>
                             </div>
                         </div>
                     </div>
@@ -144,13 +144,13 @@
                                         style="flex: 1; margin-top: 20px; border-radius: 20px;background: white;padding: 20px; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 50px -12px, rgba(0, 0, 0, 0.3) 0px 18px 26px -18px;">
                                         <div class="p-2">
                                             <h5 class="card-title" style="font-family: Poppins; text-align: center;">
-                                                Customizable Lock Date</h5>
+                                                Comprehensive Configuration Panel</h5>
                                         </div>
                                         <div class="p-2">
-                                            <p class="card-text mb-4"> This feature provides a system where you can configure a closing date, restricting users from editing documents like Sale Orders, Purchase Orders, and Delivery Orders beyond this date.
+                                            <p class="card-text mb-4"> Define lock dates, compare fields, editable fields, and warning messages for any model in the company form.
                                             </p>
 											<p>
-                                                A warning will appear when attempting to modify an order after the set lock date, reducing the risk of errors or unauthorized changes.
+                                                Ensures the system dynamically applies restrictions based on company-specific configurations.
 											</p>
                                         </div>
                                     </div>
@@ -160,15 +160,15 @@
                                         style="flex: 1; margin-top: 20px; border-radius: 20px;background: white;padding: 20px; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 50px -12px, rgba(0, 0, 0, 0.3) 0px 18px 26px -18px;">
                                         <div class="p-2">
                                             <h5 class="card-title" style="font-family: Poppins; text-align: center;">
-                                                Restricting Order Modifications
+                                                Controlled Updates for Existing Records
                                             </h5>
                                         </div>
                                         <div class="p-2">
                                             <p class="card-text mb-4">                   
-                                               Once the lock date is set, the system prevents any modifications to orders past this date, except for specific fields that are allowed to be edited. 
+                                                Updates to older records are restricted to only the fields defined as editable in the configuration.
                                             </p>
 											<p>
-												This ensures data integrity and adherence to business rules, especially for critical documents.
+												Attempting to modify non-editable fields prompts a warning message, ensuring data integrity and compliance with the configured rules.
 											</p>
                                         </div>
                                     </div>
@@ -178,10 +178,15 @@
                                         style="flex: 1; margin-top: 20px; border-radius: 20px;background: white;padding: 20px; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 50px -12px, rgba(0, 0, 0, 0.3) 0px 18px 26px -18px;">
                                         <div class="p-2">
                                             <h5 class="card-title" style="font-family: Poppins; text-align: center;">
-												Business Administrator Control</h5>
+												Record Creation Validation</h5>
                                         </div>
                                         <div class="p-2">
-                                            <p class="card-text mb-4">Users with Business Administrator access can modify the lock date through a wizard, providing flexibility for administrators to manage the system according to business needs while maintaining the necessary controls over document changes.
+                                            <p class="card-text mb-4">
+                                                During record creation, the system checks the compare field's value against the lock date.
+                                                </p>
+                                                <p>
+                                                    If the value is earlier than the lock date, a custom warning message is displayed, and the record is not created.
+                                                    If the value is later than the lock date, the record is successfully created.
                                                 </p>
                                         </div>
                                     </div>
@@ -196,13 +201,16 @@
                             <section class="oe_container my-4">
                                 <div class="panel panel-primary">
                                     <div class="panel-body p-3">
-                                        <img src="company1.png" style="width:100%"
+                                        <img src="company3.png" style="width:100%"
                                             class="img-responsive border">
                                     </div>
                                     <div style="font-family:'Montserrat', sans-serif;font-weight:normal;font-size:18px;color:#091E42; margin-top:16px; text-align: start;">
                                         <ul>
                                             <li> 
                                                 Go to General Settings -> Compamies -> Select Current Company -> Year Closing Dates
+                                            </li>
+                                            <li>
+                                                These settings dynamically control the validation rules for the selected model.
                                             </li>
                                         </ul>
                                     </div>
@@ -212,24 +220,15 @@
                             <section class="oe_container my-4">
                                 <div class="panel panel-primary">
                                     <div class="panel-body p-3">
-                                        <img src="company2.png" style="width:100%"
-                                            class="img-responsive border">
-                                    </div>
-                                </div>
-                            </section>
-                            <!-- Carousel Item 3 -->
-                            <section class="oe_container my-4">
-                                <div class="panel panel-primary">
-                                    <div class="panel-body p-3">
                                         <img src="validation1.png" style="width:100%"
                                             class="img-responsive border">
                                         <div style="font-family:'Montserrat', sans-serif;font-weight:normal;font-size:18px;color:#091E42; margin-top:16px; text-align: start;">
                                             <ul>
                                                 <li>
-                                                    Restricts order updates if the current date exceeds the configured lock date, except for selected fields
+                                                    When creating a new record, the system checks the selected compare field's value against the configured lock date.
                                                 </li>
                                                 <li>
-                                                    Displays warning messages when editing locked orders.
+                                                    If the date is earlier than the lock date, the record creation is restricted with a warning message.
                                                 </li>
                                             </ul>
                                         </div>
@@ -242,6 +241,16 @@
                                     <div class="panel-body p-3">
                                         <img src="validation2.png" style="width:100%"
                                             class="img-responsive border">
+                                    </div>
+                                    <div style="font-family:'Montserrat', sans-serif;font-weight:normal;font-size:18px;color:#091E42; margin-top:16px; text-align: start;">
+                                        <ul>
+                                            <li>
+                                                Update only allowed fields for records created before the lock date, as per the editable fields defined in the configuration.
+                                            </li>
+                                            <li>
+                                                Non-editable field modifications trigger a warning and are restricted.
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </section>
