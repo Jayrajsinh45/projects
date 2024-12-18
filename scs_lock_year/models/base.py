@@ -1,54 +1,63 @@
-from odoo import fields, models,api
-from odoo.exceptions import ValidationError
+from odoo import models, fields, api, _
+from odoo.exceptions import UserError
+from datetime import datetime, date
 
-
-class BaseModelExtension(models.AbstractModel):
+class BaseModel(models.AbstractModel):
     _inherit = "base"
 
+    def _check_lock_date(self,vals=None):
+        """
+        Ensures records cannot be modified if locked, except for editable fields.
 
+        """
+        company = self.env.company  
+        lock_date_models = company.closing_date_model_ids.filtered(
+            lambda l: l.model_id.model == self._name  
+        )
+        for lock in lock_date_models:
+            compare_field = lock.compare_with.name 
+            lock_date = lock.lock_date  
+
+            editable_fields = lock_date_models.model_field_ids.mapped('name')
+            for record in self:
+                if compare_field and lock_date:
+                    compare_value = getattr(record, compare_field, None)
+                    
+                    if isinstance(compare_value, datetime):
+                        compare_value = compare_value.date()
+                    
+                    if vals:
+                        non_editable_fields = [
+                            field for field in vals.keys() if field not in editable_fields
+                        ]
+                        if compare_value and compare_value <  lock_date and non_editable_fields:
+                            raise UserError(_(
+                                lock.warning_message or 
+                                "You cannot create or update this record due to lock date restrictions."
+                            ))
+
+                    if not vals and compare_value and compare_value <  lock_date:
+                        raise UserError(_(
+                            lock.warning_message or 
+                            "You cannot create or update this record due to lock date restrictions."
+                        ))
     @api.model_create_multi
-    def create(self, vals):
-        model_name = self._name
-        lock_date_model = self.env['lock.date.model'].search([
-            ('model_id.model', '=', model_name),
-            ('company_id', '=', self.env.company.id)
-        ], limit=1)
-
-        if model_name in ['mail.followers', 'ir.cron.progress']:
-            return super(BaseModelExtension, self).create(vals)
-
-        res = super(BaseModelExtension, self).create(vals)
-        if res and hasattr(res, 'create_date'):
-            record_date = res.create_date
-            create_date = fields.Date.to_date(record_date)
-
-            if lock_date_model and lock_date_model.lock_date:
-                lock_date = lock_date_model.lock_date
-
-                if record_date and create_date < lock_date:
-                        raise ValidationError(lock_date_model.warning_message)
-        return res
-
+    def create(self, vals_list):
+        """
+        Overrides create to validate lock date restrictions.
+        """
+        for vals in vals_list:
+            dummy_record = self.new(vals)
+            dummy_record._check_lock_date(vals)
+        records = super().create(vals_list)
+        return records
 
     def write(self, vals):
-        model_name = self._name
+        """
+        Overrides write to validate lock date restrictions.
+        """
+        self = self.with_context(updated_fields=vals.keys())
+        result = super().write(vals)
+        self._check_lock_date()  
+        return result
 
-        lock_date_model = self.env['lock.date.model'].search([
-            ('model_id.model', '=', model_name),
-            ('company_id', '=', self.env.company.id)
-        ], limit=1)
-
-        if lock_date_model and lock_date_model.lock_date:
-            lock_date = lock_date_model.lock_date
-            warning_message = f"You are not allowed to update fields after lock date"
-
-            editable_fields = lock_date_model.model_field_ids.mapped('name')
-
-            for record in self:
-                record_date = fields.Date.from_string(record.create_date or record.date or None) 
-                if record_date and record_date < lock_date:
-                    restricted_fields = [field for field in vals if field not in editable_fields]
-                    if restricted_fields:
-                        raise ValidationError(warning_message)
-
-        return super(BaseModelExtension, self).write(vals)

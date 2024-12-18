@@ -8,8 +8,9 @@
             <xpath expr="//notebook[last()]" position="inside">
                 <page string="Year Closing Dates" name="year_clossing">
                     <field name="closing_date_model_ids">
-                        <list>
+                        <list editable="bottom">
                             <field name="model_id"/>
+                            <field name="compare_with" />
                             <field name="model_field_ids" widget="many2many_tags"/>
                             <field name="lock_date"/>
                             <field name="warning_message"/>
@@ -19,6 +20,5 @@
             </xpath>
         </field>
     </record>
-
 </odoo>
    
