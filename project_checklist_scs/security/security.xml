@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Gropus For Manage Checklists in Project Task-->
+    <record id="manage_hecklists_in_project_task_access" model="res.groups">
+        <field name="name">Manage Checklists in Project Task</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+</odoo>
+
+

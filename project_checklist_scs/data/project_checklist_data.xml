@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="send_reminder_for_task_checklist" model="mail.template">
+            <field name="name">Reminder for task checklist</field>
+            <field name="model_id" ref="model_project_task" />
+            <field name="email_from">{{object.company_id.partner_id.email}}</field>
+            <field name="subject">Reminder For task checklist progress</field>
+            <field name="auto_delete" eval="False" />
+            <field name="lang">{{object.partner_id.lang}}</field>
+            <field name="body_html" type="html">
+                <p>Dear User,</p>
+                <p>Your task "<strong><t t-out="object.name"/></strong>" is due on <strong><t t-out="object.date_deadline"/></strong>, and its checklist for the current stage is not fully completed.</p>
+                <p>Please complete the checklist as soon as possible.</p>
+                <p>Best regards,</p>
+                <p>Your Team</p>
+            </field>
+        </record>
+
+        <record id="ir_cron_checklist_reminder_mail_schedule" model="ir.cron">
+            <field name="name">Send email reminder to assigned user</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="nextcall" eval="(DateTime.now().replace(hour=2, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')" />
+            <field name="model_id" ref="model_project_task"/>
+            <field name="code">model.send_checklist_reminder()</field>
+            <field name="state">code</field>
+        </record>
+
+    </data>
+</odoo>

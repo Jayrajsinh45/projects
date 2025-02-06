@@ -1,0 +1,61 @@
+<odoo>
+<!-- Inherit Project task form view -->
+    <record id="project_inherit_form_views" model="ir.ui.view">
+        <field name="name">project.task.inherit.form</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook[last()]" position="inside">
+                <page string="Checklist" name="Checklist" groups = "project_checklist_scs.manage_hecklists_in_project_task_access" invisible = "not progress_visible">
+                    <group>
+                        <field name="progress" widget="progressbar"/>
+                    </group>
+                    <field name="checklist_ids" widget='many2many_checkboxes'/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+<!-- Form view for checklist -->
+    <record id="view_project_checklist_form" model="ir.ui.view">
+        <field name="name">project.checklist.form</field>
+        <field name="model">project.checklist</field>
+        <field name="arch" type="xml">
+            <form string="Project Checklist">
+                <sheet>
+                    <group string = "Project Checklist">
+                        <group>
+                            <field name="name"/>
+                            <field name="project_ids" widget="many2many_tags"/>
+                            <field name="stage_ids" widget="many2many_tags"/>
+                            <field name="assigned_user_ids" widget="many2many_tags"/>
+                            <field name="deadline"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view for checklist -->
+    <record id="view_project_checklist_list" model="ir.ui.view">
+        <field name="name">project.checklist.list</field>
+        <field name="model">project.checklist</field>
+        <field name="arch" type="xml">
+            <list string="Project Checklist">
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action view for checklist -->
+    <record id="action_project_checklist" model="ir.actions.act_window">
+        <field name="name">Checklist</field>
+        <field name="res_model">project.checklist</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu  for checklist -->
+    <menuitem id="menu_project_checklist" name="Checklist" parent="project.menu_project_config" groups = "project_checklist_scs.manage_hecklists_in_project_task_access" action="action_project_checklist" sequence = "10"/>
+
+</odoo>
